@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> 500 Error  | SmartAdmin - Responsive admin template.</title>
+
+        <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='plugins/switchery/switchery.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='plugins/bootstrap-select/bootstrap-select.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/demo/jasmine.css') }}" rel="stylesheet">
+
+        <link href="{{ url_for('static', filename='plugins/pace/pace.min.css') }}" rel="stylesheet">
+        <script src="{{ url_for('static', filename='plugins/pace/pace.min.js') }}"></script>
+    </head>
+    <body>
+        <div id="container" class="cls-container">
+            <div class="cls-content">
+                <div class="error-full-page">
+                    <div class="col-sm-12 page-error pad-30">
+                        <div class="error-number text-primary"> 500 </div>
+                        <div class="error-details col-sm-6 col-sm-offset-3">
+                            <h3> Oops! You are stuck at 500</h3>
+                            <p> Something's wrong!
+                                <br> It looks as though we've broken something on our system.
+                                <br> Don't panic, we are fixing it! Please come back in a while.
+                                <br>
+                                <a href="index.html" class="btn btn-danger btn-return"> <i class="fa fa-home"> </i> Back to Homepage </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="{{ url_for('static', filename='js/jquery-2.1.1.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='plugins/fast-click/fastclick.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='plugins/switchery/switchery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='plugins/bootstrap-select/bootstrap-select.min.js') }}"></script>
+    </body>
+</html>

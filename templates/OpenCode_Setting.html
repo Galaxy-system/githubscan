@@ -1,0 +1,179 @@
+{% extends "mould.html" %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<div class="boxed">
+    <nav id="mainnav-container">
+        <div id="mainnav">
+            <div id="mainnav-menu-wrap">
+                <div class="nano">
+                    <div class="nano-content">
+                        <ul id="mainnav-menu" class="list-group">
+                            <!--Category name-->
+                            <li class="list-header">仪器表</li>
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                <span class="menu-title"><i class="fa fa-search-plus"></i>确认泄漏</span>
+                                <i class="arrow"></i>
+                                </a>
+                                <!--Submenu-->
+                                <ul class="collapse">
+                                    {% for rec in n_task %}
+                                    <li><a href="/OpenCodeSearch/ShowTrue/{{ rec[0] }}"><b class="menu-title"><i class="fa fa-search-plus"></i> {{ rec[0] }} </b></a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                <span class="menu-title"><i class="fa fa-search"></i>等待审核</span>
+                                <i class="arrow"></i>
+                                </a>
+                                <!--Submenu-->
+                                <ul class="collapse">
+                                    {% for rec in n_task %}
+                                    <li><a href="/OpenCodeSearch/ShowWait/{{ rec[0] }}"><b class="menu-title"><i class="fa fa-search"></i> {{ rec[0] }} </b></a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                <span class="menu-title"><i class="fa fa-search-minus"></i>疑似误报</span>
+                                <i class="arrow"></i>
+                                </a>
+                                <!--Submenu-->
+                                <ul class="collapse">
+                                    {% for rec in n_task %}
+                                    <li><a href="/OpenCodeSearch/ShowFalse/{{ rec[0] }}"><b class="menu-title"><i class="fa fa-search-minus"></i> {{ rec[0] }} </b></a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                <span class="menu-title"><i class="fa fa-gears"></i>管理配置</span>
+                                <i class="arrow"></i>
+                                </a>
+                                <!--Submenu-->
+                                <ul class="collapse">
+                                    <li><a href="/OpenCodeSearch/TaskShow"><b class="key-size"><i class="fa fa-gears"></i>  扫描任务 </b></a></li>
+                                    <li><a href="/OpenCodeSearch/TaskAddShow"><b class="key-size"><i class="fa fa-gears"></i>  添加扫描 </b></a></li>
+                                    <li><a href="/OpenCodeSearch/SystemSet"><b class="key-size"><i class="fa fa-gears"></i>  系统配置 </b></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="content-container">
+        <div class="pageheader">
+            <h3><i class="fa fa-home"></i> 代码库敏感信息发现系统 </h3>
+        </div>
+        <div id="page-content">
+            <div class="panel">
+                <div class="panel-heading">
+                <h3 class="panel-title">任务列表</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="iframebody">
+                        <caption>扫描时间</caption>
+                        <form method="post" action='/system/add_time' role="form">
+                            <select class="text" name="exec_everyweek_day">
+                                <option value="0" selected="">星期一</option>
+                                    <option value="1">星期二</option>
+                                    <option value="2">星期三 </option>
+                                    <option value="3">星期四</option>
+                                    <option value="4">星期五</option>
+                                    <option value="5">星期六</option>
+                                    <option value="6">星期日</option>
+                            </select>
+                            <input type="text" name="exec_everyweek_time" id="exec_everyweek_time" class="cmn_form" size="5" maxlength="5" value="00:00" onchange="timeCheck(this,'#exec_everyweek_time_validate')" onmouseout="timeCheck(this,'#exec_everyweek_time_validate')">
+                            <span class="text_comment">例：14:23</span>
+                            <button type="submit" value="add_time" class="btn btn-primary btn-save">保 存</button>
+                            <span class="text_comment">当前时间：{{ n_time }}</span>
+                        </form>
+                        <caption>{{ n_read }}</caption>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">任务列表</h3>
+                </div>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th width="65%">Tocken值</th>
+                            <th>状态</th>
+                            <th width="100">验证</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for rec in n_tocken %}
+                        <form action="/tocken/{{ rec[0] }}" name="c_tocken" id="{{ rec[0] }}" method="get">
+                            <tr>
+                                <td>{{ rec[0] }}</td>
+                                <td>{{ rec[1] }}</td>
+                                <td><a href="javascript:document.getElementById('{{ rec[0] }}').submit();">测试</a></td>
+                            </tr>
+                        </form>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+
+                <div class="clearfix">
+                    <div>
+                        <a id="modal-4799" href="#modal-container-4799" role="button" class="btn" data-toggle="modal">添加扫描</a>
+
+                        <div class="modal fade" id="modal-container-4799" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h4 class="modal-title" id="myModalLabel">
+                                            添加扫描
+                                        </h4>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <form method="post" action='/system/add_tocken' role="form">
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" name="n_tocken" value="" placeholder="tocken">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                                <button type="submit" value="add_tocken" class="btn btn-primary">保存</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block list %}
+        <!--FooTable [ OPTIONAL ]-->
+        <script src="{{ url_for('static', filename='plugins/fooTable/dist/footable.all.min.js') }}"></script>
+        <!--Fullscreen jQuery [ OPTIONAL ]-->
+        <script src="{{ url_for('static', filename='plugins/screenfull/screenfull.js') }}"></script>
+        <!--FooTable Example [ SAMPLE ]-->
+        <script src="{{ url_for('static', filename='js/demo/tables-footable.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,184 @@
+{% extends "mould.html" %}
+
+{% block head %}
+<link href="{{ url_for('static', filename='css/demo/jasmine.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<div class="boxed">
+    <nav id="mainnav-container">
+        <div id="mainnav">
+            <div id="mainnav-menu-wrap">
+                <div class="nano">
+                    <div class="nano-content">
+                        <ul id="mainnav-menu" class="list-group">
+                            <!--Category name-->
+                            <li class="list-header">仪器表</li>
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                <span class="menu-title"><i class="fa fa-search-plus"></i>确认泄漏</span>
+                                <i class="arrow"></i>
+                                </a>
+                                <!--Submenu-->
+                                <ul class="collapse">
+                                    {% for rec in n_task %}
+                                    <li><a href="/OpenCodeSearch/ShowTrue/{{ rec[0] }}"><b class="menu-title"><i class="fa fa-search-plus"></i> {{ rec[0] }} </b></a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                <span class="menu-title"><i class="fa fa-search"></i>等待审核</span>
+                                <i class="arrow"></i>
+                                </a>
+                                <!--Submenu-->
+                                <ul class="collapse">
+                                    {% for rec in n_task %}
+                                    <li><a href="/OpenCodeSearch/ShowWait/{{ rec[0] }}"><b class="menu-title"><i class="fa fa-search"></i> {{ rec[0] }} </b></a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                <span class="menu-title"><i class="fa fa-search-minus"></i>疑似误报</span>
+                                <i class="arrow"></i>
+                                </a>
+                                <!--Submenu-->
+                                <ul class="collapse">
+                                    {% for rec in n_task %}
+                                    <li><a href="/OpenCodeSearch/ShowFalse/{{ rec[0] }}"><b class="menu-title"><i class="fa fa-search-minus"></i> {{ rec[0] }} </b></a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                <span class="menu-title"><i class="fa fa-gears"></i>管理配置</span>
+                                <i class="arrow"></i>
+                                </a>
+                                <!--Submenu-->
+                                <ul class="collapse">
+                                    <li><a href="/OpenCodeSearch/TaskShow"><b class="key-size"><i class="fa fa-gears"></i>  扫描任务 </b></a></li>
+                                    <li><a href="/OpenCodeSearch/TaskAddShow"><b class="key-size"><i class="fa fa-gears"></i>  添加扫描 </b></a></li>
+                                    <li><a href="/OpenCodeSearch/SystemSet"><b class="key-size"><i class="fa fa-gears"></i>  系统配置 </b></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="content-container">
+        <div class="pageheader">
+            <h3><i class="fa fa-home"></i> 代码库敏感信息发现系统 </h3>
+        </div>
+        <div id="page-content">
+            <div class="panel">
+                <div class="panel-heading">
+                <h3 class="panel-title">添加任务</h3>
+            </div>
+            <form class="panel-body form-horizontal" action="/OpenCodeSearch/TaskAdd" method="post">
+                <div class="form-group">
+                    <label class="col-md-5 control-label" for="demo-email-input">任务名称：</label>
+                    <div class="col-md-4">
+                        <input type="text" id="demo-email-input" class="form-control" placeholder="项目名称：例子：移动" name="task" value="">
+                        <small class="help-block">请输入任务名称（自定义）</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-5 control-label" for="demo-email-input">任务类型：</label>
+                    <div class="col-md-4">
+                        <input type="text" id="demo-email-input" class="form-control" placeholder="任务类型：例子：邮件" name="task_type" value="">
+                        <small class="help-block">任务所属标签（自定义）</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-5 control-label" for="demo-email-input">关键字：</label>
+                    <div class="col-md-4">
+                        <input type="text" id="demo-email-input" class="form-control" placeholder="关键字" name="keywords" value="">
+                        <small class="help-block">请输入关键字，以,号分割，不建议一个任务添加太多</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-5 control-label" for="demo-email-input">二次扫描关键字：</label>
+                    <div class="col-md-4">
+                        <input type="text" id="demo-email-input" class="form-control" placeholder="二次扫描关键字" name="secondkeywords" value="">
+                        <small class="help-block">请输入针对作者所有项目的关键字扫描，以,号分割，此处建议一到两个最佳</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-5 control-label" for="demo-email-input">过滤后缀：</label>
+                    <div class="col-md-4">
+                        <input type="text" id="demo-email-input" class="form-control" placeholder="过滤后缀，只搜索指定的后缀" name="extension" value="">
+                        <small class="help-block">空为不过滤后缀，全部搜索</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-5 control-label">搜索成功后上下文匹配行数：</label>
+                    <div class="col-md-4">
+                        <div class="radio">
+                            <!-- Inline Icon Radios Buttons -->
+                            <!--===================================================-->
+                            <label class="form-radio form-icon btn btn-success btn-labeled form-text active">
+                            <input type="radio" name="mode" value="only-match" checked> 匹配一行
+                            </label>
+                            <label class="form-radio form-icon btn btn-success btn-labeled form-text">
+                            <input type="radio" name="mode" value="normal-match"> 匹配三行
+                            </label>
+                            <!--===================================================-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label class="col-md-5 control-label">扫描开关：</label>
+                    <div class="col-md-4">
+                        <div class="radio">
+                            <!-- Inline Icon Radios Buttons -->
+                            <!--===================================================-->
+                            <label class="form-radio form-icon btn btn-danger btn-labeled form-text active">
+                            <input type="radio" name="choose" value="open"  checked> 开启扫描
+                            </label>
+                            <label class="form-radio form-icon btn btn-danger btn-labeled form-text">
+                            <input type="radio" name="choose" value="closed" > 关闭扫描
+                            </label>
+                            <!--===================================================-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12 ">
+                        <div class="panel">
+                            <hr>
+                            <div class="panel-body demo-jasmine-btn">
+                                <button class="btn btn-primary">提交</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block list %}
+        <!--FooTable [ OPTIONAL ]-->
+        <script src="{{ url_for('static', filename='plugins/fooTable/dist/footable.all.min.js') }}"></script>
+        <!--Fullscreen jQuery [ OPTIONAL ]-->
+        <script src="{{ url_for('static', filename='plugins/screenfull/screenfull.js') }}"></script>
+        <!--FooTable Example [ SAMPLE ]-->
+        <script src="{{ url_for('static', filename='js/demo/tables-footable.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "mould.html" %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<div class="boxed">
+    <nav id="mainnav-container">
+        <div id="mainnav">
+            <div id="mainnav-menu-wrap">
+                <div class="nano">
+                    <div class="nano-content">
+                        <ul id="mainnav-menu" class="list-group">
+                            <!--Category name-->
+                            <li class="list-header">仪器表</li>
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                <span class="menu-title"><i class="fa fa-search-plus"></i>确认泄漏</span>
+                                <i class="arrow"></i>
+                                </a>
+                                <!--Submenu-->
+                                <ul class="collapse">
+                                    {% for rec in n_task %}
+                                    <li><a href="/OpenCodeSearch/ShowTrue/{{ rec[0] }}"><b class="menu-title"><i class="fa fa-search-plus"></i> {{ rec[0] }} </b></a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                <span class="menu-title"><i class="fa fa-search"></i>等待审核</span>
+                                <i class="arrow"></i>
+                                </a>
+                                <!--Submenu-->
+                                <ul class="collapse">
+                                    {% for rec in n_task %}
+                                    <li><a href="/OpenCodeSearch/ShowWait/{{ rec[0] }}"><b class="menu-title"><i class="fa fa-search"></i> {{ rec[0] }} </b></a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                <span class="menu-title"><i class="fa fa-search-minus"></i>疑似误报</span>
+                                <i class="arrow"></i>
+                                </a>
+                                <!--Submenu-->
+                                <ul class="collapse">
+                                    {% for rec in n_task %}
+                                    <li><a href="/OpenCodeSearch/ShowFalse/{{ rec[0] }}"><b class="menu-title"><i class="fa fa-search-minus"></i> {{ rec[0] }} </b></a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                <span class="menu-title"><i class="fa fa-gears"></i>管理配置</span>
+                                <i class="arrow"></i>
+                                </a>
+                                <!--Submenu-->
+                                <ul class="collapse">
+                                    <li><a href="/OpenCodeSearch/TaskShow"><b class="key-size"><i class="fa fa-gears"></i>  扫描任务 </b></a></li>
+                                    <li><a href="/OpenCodeSearch/TaskAddShow"><b class="key-size"><i class="fa fa-gears"></i>  添加扫描 </b></a></li>
+                                    <li><a href="/OpenCodeSearch/SystemSet"><b class="key-size"><i class="fa fa-gears"></i>  系统配置 </b></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+</div>
+{% endblock %}
+
+{% block list %}
+        <!--FooTable [ OPTIONAL ]-->
+        <script src="{{ url_for('static', filename='plugins/fooTable/dist/footable.all.min.js') }}"></script>
+        <!--Fullscreen jQuery [ OPTIONAL ]-->
+        <script src="{{ url_for('static', filename='plugins/screenfull/screenfull.js') }}"></script>
+        <!--FooTable Example [ SAMPLE ]-->
+        <script src="{{ url_for('static', filename='js/demo/tables-footable.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> 敏感信息发现系统 </title>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+        <!--Bootstrap Stylesheet [ REQUIRED ]-->
+        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+        <!--Jasmine Stylesheet [ REQUIRED ]-->
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+        <!--Font Awesome [ OPTIONAL ]-->
+        <link href="{{ url_for('static', filename='plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+
+        {% block head %}{% endblock %}
+
+    </head>
+    <body>
+        <div id="container" class="mainnav-lg navbar-fixed mainnav-fixed">
+            <!--NAVBAR-->
+            <!--===================================================-->
+            <header id="navbar">
+                <div id="navbar-container" class="boxed">
+                    <!--Brand logo & name-->
+                    <!--================================-->
+                    <div class="navbar-header">
+                        <a href="/" class="navbar-brand">
+                            <i class="fa fa-cube brand-icon"></i>
+                            <div class="brand-title">
+                                <span class="brand-text">信息收集系统</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="navbar-content clearfix">
+                        <ul class="nav navbar-top-links pull-left">
+
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                                <i class="fa fa-envelope fa-lg"></i>
+                                <span class="badge badge-header badge-warning">9</span>
+                                </a>
+                                <!--Message dropdown menu-->
+                                <div class="dropdown-menu dropdown-menu-md with-arrow">
+                                    <div class="pad-all bord-btm">
+                                       <div class="h4 text-muted text-thin mar-no">You have 3 messages.</div>
+                                    </div>
+                                    <div class="nano scrollable">
+                                        <div class="nano-content">
+                                            <ul class="head-list">
+                                                <!-- Dropdown list-->
+                                                <li>
+                                                    <a href="#" class="media">
+
+                                                        <div class="media-left">
+                                                            <img src="{{ url_for('static', filename='img/av2.png') }}" alt="Profile Picture" class="img-circle img-sm">
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <div class="text-nowrap">Andy sent you a message</div>
+                                                            <small class="text-muted">15 minutes ago</small>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <!-- Dropdown list-->
+                                                <li>
+                                                    <a href="#" class="media">
+                                                        <div class="media-left">
+                                                            <img src="{{ url_for('static', filename='img/av4.png') }}" alt="Profile Picture" class="img-circle img-sm">
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <div class="text-nowrap">Lucy sent you a message</div>
+                                                            <small class="text-muted">30 minutes ago</small>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <!-- Dropdown list-->
+                                                <li>
+                                                    <a href="#" class="media">
+                                                        <div class="media-left">
+                                                            <img src="{{ url_for('static', filename='img/av3.png') }}" alt="Profile Picture" class="img-circle img-sm">
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <div class="text-nowrap">Jackson sent you a message</div>
+                                                            <small class="text-muted">40 minutes ago</small>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <!-- Dropdown list-->
+                                                <li>
+                                                    <a href="#" class="media">
+                                                        <div class="media-left">
+                                                            <img src="{{ url_for('static', filename='img/av6.png') }}" alt="Profile Picture" class="img-circle img-sm">
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <div class="text-nowrap">Donna sent you a message</div>
+                                                            <small class="text-muted">5 hours ago</small>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <!-- Dropdown list-->
+                                                <li>
+                                                    <a href="#" class="media">
+                                                        <div class="media-left">
+                                                            <img src="{{ url_for('static', filename='img/av4.png') }}" alt="Profile Picture" class="img-circle img-sm">
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <div class="text-nowrap">Lucy sent you a message</div>
+                                                            <small class="text-muted">Yesterday</small>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <!-- Dropdown list-->
+                                                <li>
+                                                    <a href="#" class="media">
+                                                        <div class="media-left">
+                                                            <img src="{{ url_for('static', filename='img/av3.png') }}" alt="Profile Picture" class="img-circle img-sm">
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <div class="text-nowrap">Jackson sent you a message</div>
+                                                            <small class="text-muted">Yesterday</small>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!--Dropdown footer-->
+                                    <div class="pad-all bord-top">
+                                        <a href="#" class="btn-link text-dark box-block">
+                                        <i class="fa fa-angle-right fa-lg pull-right"></i>Show All Messages
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown" class="dropdown-toggle"> <i class="fa fa-bell fa-lg"></i> <span class="badge badge-header badge-danger">5</span> </a>
+                                <!--Notification dropdown menu-->
+                                <div class="dropdown-menu dropdown-menu-md with-arrow">
+                                    <div class="pad-all bord-btm">
+                                       <div class="h4 text-muted text-thin mar-no"> Notification </div>
+                                    </div>
+                                    <div class="nano scrollable">
+                                        <div class="nano-content">
+                                            <ul class="head-list">
+                                                <!-- Dropdown list-->
+                                                <li>
+                                                    <a href="#" class="media">
+                                                        <div class="media-left"> <span class="icon-wrap icon-circle bg-primary"> <i class="fa fa-comment fa-lg"></i> </span> </div>
+                                                        <div class="media-body">
+                                                            <div class="text-nowrap">New comments waiting approval</div>
+                                                            <small class="text-muted">15 minutes ago</small>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <!-- Dropdown list-->
+                                                <li>
+                                                    <a href="#" class="media">
+                                                        <span class="badge badge-success pull-right">90%</span>
+                                                        <div class="media-left"> <span class="icon-wrap icon-circle bg-danger"> <i class="fa fa-hdd-o fa-lg"></i> </span> </div>
+                                                        <div class="media-body">
+                                                            <div class="text-nowrap">HDD is full</div>
+                                                            <small class="text-muted">50 minutes ago</small>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <!-- Dropdown list-->
+                                                <li>
+                                                    <a href="#" class="media">
+                                                        <div class="media-left"> <span class="icon-wrap icon-circle bg-info"> <i class="fa fa-file-word-o fa-lg"></i> </span> </div>
+                                                        <div class="media-body">
+                                                            <div class="text-nowrap">Write a news article</div>
+                                                            <small class="text-muted">Last Update 8 hours ago</small>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <!-- Dropdown list-->
+                                                <li>
+                                                    <a href="#" class="media">
+                                                        <span class="label label-danger pull-right">New</span>
+                                                        <div class="media-left"> <span class="icon-wrap icon-circle bg-purple"> <i class="fa fa-comment fa-lg"></i> </span> </div>
+                                                        <div class="media-body">
+                                                            <div class="text-nowrap">Comment Sorting</div>
+                                                            <small class="text-muted">Last Update 8 hours ago</small>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <!-- Dropdown list-->
+                                                <li>
+                                                    <a href="#" class="media">
+                                                        <div class="media-left"> <span class="icon-wrap icon-circle bg-success"> <i class="fa fa-user fa-lg"></i> </span> </div>
+                                                        <div class="media-body">
+                                                            <div class="text-nowrap">New User Registered</div>
+                                                            <small class="text-muted">4 minutes ago</small>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="pad-all bord-top">
+                                        <a href="#" class="btn-link text-dark box-block"> <i class="fa fa-angle-right fa-lg pull-right"></i>Show All Notifications </a>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                        <ul class="nav navbar-top-links pull-right">
+
+                            <li class="hidden-xs" id="toggleFullscreen">
+                                <a class="fa fa-expand" data-toggle="fullscreen" href="#" role="button">
+                                <span class="sr-only">Toggle fullscreen</span>
+                                </a>
+                            </li>
+
+                            <li id="dropdown-user" class="dropdown">
+                                <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
+                                    <span class="pull-right"> <img class="img-circle img-user media-object" src="{{ url_for('static', filename='img/av1.png') }}" alt="Profile Picture"> </span>
+                                    <div class="username hidden-xs">Admin</div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right with-arrow">
+
+                                    <ul class="head-list">
+                                        <li>
+                                            <a href="#"> <i class="fa fa-user fa-fw"></i> Profile </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">  <i class="fa fa-envelope fa-fw"></i> Messages </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">  <i class="fa fa-gear fa-fw"></i> Settings </a>
+                                        </li>
+                                        <li>
+                                            <a href="#"> <i class="fa fa-sign-out fa-fw"></i> Logout </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <nav class="navbar navbar-default megamenu">
+                        <div class="navbar-header">
+                            <button type="button" data-toggle="collapse" data-target="#defaultmenu" class="navbar-toggle">
+                            <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                            </button>
+                        </div>
+
+                        <div id="defaultmenu" class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+
+                                <li class="dropdown">
+                                    <a href="#" data-toggle="dropdown" class="dropdown-toggle head-title"> 主页 <b class="caret"></b></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="mould.html">Dashboard V1 </a></li>
+                                        <li><a href="dashboard-v2.html">Dashboard V2 </a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="#" class="head-title"> 代码库搜索 </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+
+            {% block body %}{% endblock %}
+
+            <!-- FOOTER -->
+            <!--===================================================-->
+            <footer id="footer">
+                <!-- Visible when footer positions are fixed -->
+                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+                <div class="show-fixed pull-right">
+                    <ul class="footer-list list-inline">
+                        <li>
+                            <p class="text-sm">SEO Proggres</p>
+                            <div class="progress progress-sm progress-light-base">
+                                <div style="width: 80%" class="progress-bar progress-bar-danger"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <p class="text-sm">Online Tutorial</p>
+                            <div class="progress progress-sm progress-light-base">
+                                <div style="width: 80%" class="progress-bar progress-bar-primary"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <button class="btn btn-sm btn-dark btn-active-success">Checkout</button>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Visible when footer positions are static -->
+                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+                <div class="hide-fixed pull-right pad-rgt">敏感信息发现系统 v2.0</div>
+                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+                <!-- Remove the class name "show-fixed" and "hide-fixed" to make the content always appears. -->
+                <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+                <p class="pad-lft">&#0169; </p>
+            </footer>
+            <!--===================================================-->
+            <!-- END FOOTER -->
+            <!-- SCROLL TOP BUTTON -->
+            <!--===================================================-->
+            <button id="scroll-top" class="btn"><i class="fa fa-chevron-up"></i></button>
+            <!--===================================================-->
+        </div>
+
+        <!--jQuery [ REQUIRED ]-->
+        <script src="{{ url_for('static', filename='js/jquery-2.1.1.min.js') }}"></script>
+        <!--BootstrapJS [ RECOMMENDED ]-->
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <!--Fast Click [ OPTIONAL ]-->
+        <script src="{{ url_for('static', filename='plugins/fast-click/fastclick.min.js') }}"></script>
+        <!--Jquery Nano Scroller js [ REQUIRED ]-->
+        <script src="{{ url_for('static', filename='plugins/nanoscrollerjs/jquery.nanoscroller.min.js') }}"></script>
+        <!--Metismenu js [ REQUIRED ]-->
+        <script src="{{ url_for('static', filename='plugins/metismenu/metismenu.min.js') }}"></script>
+        <!--Jasmine Admin [ RECOMMENDED ]-->
+        <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+
+        {% block list %}{% endblock %}
+
+    </body>
+</html>

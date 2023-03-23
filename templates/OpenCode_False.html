@@ -1,0 +1,161 @@
+{% extends "mould.html" %}
+
+{% block head %}
+    <link href="{{ url_for('static', filename='plugins/fooTable/css/footable.core.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<div class="boxed">
+    <nav id="mainnav-container">
+        <div id="mainnav">
+            <div id="mainnav-menu-wrap">
+                <div class="nano">
+                    <div class="nano-content">
+                        <ul id="mainnav-menu" class="list-group">
+                            <!--Category name-->
+                            <li class="list-header">仪器表</li>
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                <span class="menu-title"><i class="fa fa-search-plus"></i>确认泄漏</span>
+                                <i class="arrow"></i>
+                                </a>
+                                <!--Submenu-->
+                                <ul class="collapse">
+                                    {% for rec in n_task %}
+                                    <li><a href="/OpenCodeSearch/ShowTrue/{{ rec[0] }}"><b class="menu-title"><i class="fa fa-search-plus"></i> {{ rec[0] }} </b></a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                <span class="menu-title"><i class="fa fa-search"></i>等待审核</span>
+                                <i class="arrow"></i>
+                                </a>
+                                <!--Submenu-->
+                                <ul class="collapse">
+                                    {% for rec in n_task %}
+                                    <li><a href="/OpenCodeSearch/ShowWait/{{ rec[0] }}"><b class="menu-title"><i class="fa fa-search"></i> {{ rec[0] }} </b></a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                <span class="menu-title"><i class="fa fa-search-minus"></i>疑似误报</span>
+                                <i class="arrow"></i>
+                                </a>
+                                <!--Submenu-->
+                                <ul class="collapse">
+                                    {% for rec in n_task %}
+                                    <li><a href="/OpenCodeSearch/ShowFalse/{{ rec[0] }}"><b class="menu-title"><i class="fa fa-search-minus"></i> {{ rec[0] }} </b></a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0)">
+                                <span class="menu-title"><i class="fa fa-gears"></i>管理配置</span>
+                                <i class="arrow"></i>
+                                </a>
+                                <!--Submenu-->
+                                <ul class="collapse">
+                                    <li><a href="/OpenCodeSearch/TaskShow"><b class="key-size"><i class="fa fa-gears"></i>  扫描任务 </b></a></li>
+                                    <li><a href="/OpenCodeSearch/TaskAddShow"><b class="key-size"><i class="fa fa-gears"></i>  添加扫描 </b></a></li>
+                                    <li><a href="/OpenCodeSearch/SystemSet"><b class="key-size"><i class="fa fa-gears"></i>  系统配置 </b></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="content-container">
+        <div class="pageheader">
+            <h3><i class="fa fa-home"></i> 代码库敏感信息发现 </h3>
+        </div>
+            <div id="page-content">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">关键字 / 疑似误报</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="pad-btm">
+                        <button id="demo-foo-expand" class="btn btn-warning">显示全部</button>
+                        <button id="demo-foo-collapse" class="btn btn-info">关闭显示</button>
+                    </div>
+                    <table id="demo-foo-col-exp" class="table toggle-arrow-small" >
+                        <thead>
+                            <tr>
+                                <th data-toggle="true"><i class="fa fa-list-ul"></i> 任务名称</th>
+                                <th data-toggle="true"><i class="fa fa-key"></i> 关键字</th>
+                                <th data-toggle="true"><i class="fa fa-user"></i> 作者</th>
+                                <th data-toggle="true"><i class="fa fa-cloud"></i> 项目</th>
+                                <th data-toggle="true"><i class="fa fa-navicon"></i> 任务类型</th>
+                                <th data-toggle="true"><i class="fa fa-server"></i> 泄漏平台</th>
+                                <th data-toggle="all"><i class="fa fa-clock-o"></i> 发现时间</th>
+                                <th data-toggle="all"><i class="fa fa-recycle"></i> 确认泄漏</th>
+                                <th data-toggle="all"><i class="fa fa-comment"></i> 备注记录</th>
+                                <th data-toggle="all"><i class="fa fa-save"></i> 修改备注</th>
+                                <th data-hide="all"></th>
+                                <th data-hide="all"></th>
+                            </tr>
+                        </thead>
+                        <tbody >
+
+                            {% for rec in n_value %}
+                            <form action="/OpenCodeSearch/changefalse"  method="post">
+                                <tr>
+                                    <td><input  type="hidden" name="task" value="{{ rec[0] }}">{{ rec[0] }}</td>
+                                    <td>{{ rec[3] }}</td>
+                                    <td>{{ rec[4] }}</td>
+                                    <td>{{ rec[5] }}</td>
+                                    <td>{{ rec[1] }}</td>
+                                    <td>{{ rec[2] }}</td>
+                                    <td><input  type="hidden" name="codeurl" value="{{ rec[6] }}">{{ rec[8] }}</td>
+                                    <td>
+                                        <button name="handle" value="choosetrue" class="btn btn-danger fa fa-bell"> 泄漏 </button>
+                                    </td>
+                                    <td><input  type="text" name="message" value="{{ rec[10] }}"></td>
+                                    <td>
+                                        <button name="handle" value="addmessgae" class="btn btn-success fa fa-save"> 备注 </button>
+                                    </td>
+                                    <div class="warp">
+                                    <td><a href="{{ rec[6] }}" target="_blank"><font color="red">{{ rec[6] }}</font></a></td>
+                                    <td>========code=======<br>{{ rec[7] | safe }}</td>
+                                        </div>
+                                </tr>
+                            </form>
+                            {% endfor %}
+
+                            <tfoot>
+                                <tr>
+                                    <td colspan="7">
+                                        <div class="text-center">
+                                            <ul class="pagination"></ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block list %}
+        <!--FooTable [ OPTIONAL ]-->
+        <script src="{{ url_for('static', filename='plugins/fooTable/dist/footable.all.min.js') }}"></script>
+        <!--Fullscreen jQuery [ OPTIONAL ]-->
+        <script src="{{ url_for('static', filename='plugins/screenfull/screenfull.js') }}"></script>
+        <!--FooTable Example [ SAMPLE ]-->
+        <script src="{{ url_for('static', filename='js/demo/tables-footable.js') }}"></script>
+{% endblock %}
